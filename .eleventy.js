@@ -7,6 +7,14 @@ module.exports = function(eleventyConfig) {
       day: 'numeric' 
     });
   });
+  
+  eleventyConfig.addFilter("slug", (str) => {
+    if (!str) return "post";
+    return str.toLowerCase()
+              .replace(/[^\w\s-]/g, '')
+              .replace(/[\s_-]+/g, '-')
+              .replace(/^-+|-+$/g, '');
+  });
 
   return {
     dir: {
