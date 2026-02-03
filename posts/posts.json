@@ -1,6 +1,5 @@
-
 {
-  "layout": "post.liquid",
-  "tags": ["posts"],
-  "permalink": "/journal/{{ title | slugify }}/"
+  "layout": "layout.liquid",
+  "tags": "posts",
+  "permalink": "/journal/{{ title | slug }}/index.html"
 }
