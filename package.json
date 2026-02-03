@@ -1,0 +1,15 @@
+
+{
+  "name": "apex-journal",
+  "version": "1.0.0",
+  "description": "A premium minimalist car enthusiast journal built with 11ty.",
+  "main": "index.js",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve",
+    "debug": "DEBUG=Eleventy* npx @11ty/eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}

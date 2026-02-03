@@ -1,0 +1,111 @@
+
+---
+layout: layout.liquid
+---
+
+<article class="max-w-4xl mx-auto px-6 py-20">
+  <!-- Post Header -->
+  <header class="mb-16 text-center">
+    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-400 block mb-6">{{ category }}</span>
+    <h1 class="text-4xl md:text-7xl font-black tracking-tighter mb-8 leading-none">{{ title }}</h1>
+    
+    <div class="flex flex-wrap justify-center items-center gap-4 text-sm text-zinc-500 font-medium">
+      <span class="text-zinc-900">{{ author }}</span>
+      <span class="w-1 h-1 bg-zinc-300 rounded-full"></span>
+      <time datetime="{{ date | date: '%Y-%m-%d' }}">{{ date | postDate }}</time>
+      <span class="w-1 h-1 bg-zinc-300 rounded-full"></span>
+      <span>{{ readingTime }} read</span>
+    </div>
+
+    {% if tags %}
+    <div class="mt-8 flex flex-wrap justify-center gap-2">
+      {% for tag in tags %}
+        {% if tag != "posts" %}
+          <span class="px-3 py-1 bg-white text-zinc-400 text-[9px] uppercase tracking-[0.15em] font-bold rounded-full border border-zinc-100">{{ tag }}</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </header>
+
+  <!-- Featured Image -->
+  {% if coverImage %}
+  <div class="w-full aspect-[21/9] bg-zinc-100 mb-20 overflow-hidden rounded-sm">
+     <img src="{{ coverImage }}" alt="{{ title }}" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-1000">
+  </div>
+  {% endif %}
+
+  <!-- Post Content -->
+  <div class="max-w-2xl mx-auto prose prose-zinc prose-lg lg:prose-xl prose-headings:font-black prose-headings:tracking-tighter prose-a:text-zinc-900 prose-a:underline-offset-4 hover:prose-a:text-zinc-500 transition-colors">
+    {{ content }}
+  </div>
+
+  <!-- Social Sharing -->
+  <section class="max-w-2xl mx-auto mt-32 pt-16 border-t border-zinc-100">
+    <div class="flex flex-col items-center">
+      <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-10">Share this entry</h4>
+      <div class="flex items-center space-x-10">
+        <!-- X / Twitter -->
+        <a href="https://twitter.com/intent/tweet?text={{ title | url_encode }}&url={{ metadata.url | url_encode }}{{ page.url | url_encode }}" 
+           target="_blank" rel="noopener" 
+           class="text-zinc-300 hover:text-zinc-900 transition-all transform hover:-translate-y-1" 
+           aria-label="Share on X">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+          </svg>
+        </a>
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ metadata.url | url_encode }}{{ page.url | url_encode }}" 
+           target="_blank" rel="noopener" 
+           class="text-zinc-300 hover:text-zinc-900 transition-all transform hover:-translate-y-1" 
+           aria-label="Share on Facebook">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ metadata.url | url_encode }}{{ page.url | url_encode }}" 
+           target="_blank" rel="noopener" 
+           class="text-zinc-300 hover:text-zinc-900 transition-all transform hover:-translate-y-1" 
+           aria-label="Share on LinkedIn">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.454C23.208 24 24 23.227 24 22.271V1.729C24 .774 23.208 0 22.225 0z"/>
+          </svg>
+        </a>
+        <!-- Copy Link -->
+        <button onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied to clipboard');"
+                class="text-zinc-300 hover:text-zinc-900 transition-all transform hover:-translate-y-1"
+                aria-label="Copy Page Link">
+          <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Post Navigation -->
+  <nav class="max-w-2xl mx-auto mt-24 flex justify-between border-t border-zinc-100 pt-12">
+    {% assign previousPost = collections.posts | getPreviousCollectionItem: page %}
+    {% assign nextPost = collections.posts | getNextCollectionItem: page %}
+
+    <div class="w-1/2 pr-4">
+      {% if previousPost %}
+      <a href="{{ previousPost.url }}" class="group">
+        <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-400 block mb-2">Previous Entry</span>
+        <span class="text-lg font-bold tracking-tight text-zinc-900 group-hover:text-zinc-500 transition">{{ previousPost.data.title }}</span>
+      </a>
+      {% endif %}
+    </div>
+
+    <div class="w-1/2 pl-4 text-right">
+      {% if nextPost %}
+      <a href="{{ nextPost.url }}" class="group">
+        <span class="text-[9px] font-bold uppercase tracking-widest text-zinc-400 block mb-2">Next Entry</span>
+        <span class="text-lg font-bold tracking-tight text-zinc-900 group-hover:text-zinc-500 transition">{{ nextPost.data.title }}</span>
+      </a>
+      {% endif %}
+    </div>
+  </nav>
+</article>
