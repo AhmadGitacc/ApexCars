@@ -19,7 +19,7 @@ title: Archive
           </a>
         </div>
         <div class="mt-4 md:mt-0 md:text-right">
-          <time class="text-sm font-medium text-zinc-400">{{ post.date | postDate }}</time>
+          <time class="text-sm font-medium text-zinc-400">{{ post.date | date: "%B %d, %Y" }}</time>
         </div>
       </div>
     {% endfor %}
